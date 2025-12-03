@@ -1,0 +1,80 @@
+
+/* ========= DASHBOARD STYLE ========= */
+.dashboard-container {
+    width: 85%;
+    margin: 40px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.10);
+}
+
+.dashboard-container h2 {
+    margin-top: 0;
+    color: #2f3640;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.nav-menu {
+    margin-bottom: 25px;
+}
+
+.nav-menu a {
+    padding: 10px 14px;
+    background: #40739e;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+.nav-menu a:hover {
+    background: #2b5880;
+}
+
+.table-candidates {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+.table-candidates th,
+.table-candidates td {
+    border: 1px solid #dcdde1;
+    padding: 10px;
+    text-align: left;
+    font-size: 15px;
+}
+
+.table-candidates th {
+    background: #f1f2f6;
+    font-weight: 600;
+}
+
+.delete-btn {
+    color: #c23616;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.delete-btn:hover {
+    color: #8e1b0b;
+}
+.action-buttons {
+    text-align: center;
+    font-size: 24px;
+}
+
+.edit-btn,
+.delete-btn {
+    text-decoration: none;
+    margin: 0 8px;
+    cursor: pointer;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+    opacity: 0.6;
+}
