@@ -1,5 +1,5 @@
 <?php
-
+include "koneksi.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +13,7 @@
 <body>
     <div class="box">
         <img src="https://cdn-icons-png.flaticon.com/512/565/565547.png" alt="maintenance">
-        <h1>Halaman Dapat Diakses Ketika Pemilihan Ketua Osis Selesai</h1>
+        <h1>Halaman Tidak Dapat Diaksesi</h1>
         <p>Kami sedang melakukan pembaruan sistem.<br>Silakan kembali lagi nanti</p>
     </div>
 </body>

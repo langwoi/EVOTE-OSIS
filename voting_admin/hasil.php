@@ -33,12 +33,12 @@ $data = mysqli_query($koneksi, "SELECT * FROM candidates ORDER BY votes DESC");
         $suara = [];
         while ($d = mysqli_fetch_assoc($data)) {
             $nama[] = $d['name'];
-            $suara[] = $d['votes'];
+            $suara[] = $d['vote'];
         ?>
         <tr>
             <td><?= $no++; ?></td>
             <td><?= $d['name']; ?></td>
-            <td><strong><?= $d['votes']; ?></strong></td>
+            <td><strong><?= $d['vote']; ?></strong></td>
         </tr>
         <?php } ?>
     </table>

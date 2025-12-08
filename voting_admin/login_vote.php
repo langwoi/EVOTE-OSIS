@@ -2,29 +2,34 @@
 session_start();
 include "koneksi.php";
 
-// Jika sudah login sebelumnya tapi belum voting → masuk langsung
+// Jika sudah login siswa → langsung ke index
 if (isset($_SESSION['voter_id'])) {
     header("Location: index_public.php");
     exit;
 }
 
+// Proses login siswa
 if (isset($_POST['login'])) {
-    $name  = $_POST['name'];
-    $class = $_POST['class'];
-    $absen = $_POST['absen'];
 
-    // ================================
-    // CEK ABSEN DI KELAS YANG SAMA
-    // ================================
+    // Ambil input dan escape untuk keamanan
+    $name  = mysqli_real_escape_string($koneksi, trim($_POST['name']));
+    $class = mysqli_real_escape_string($koneksi, trim($_POST['class']));
+    $absen = mysqli_real_escape_string($koneksi, trim($_POST['absen']));
+
+    // =========================
+    // CEK NOMOR ABSEN DI KELAS
+    // =========================
     $cekAbsen = mysqli_query($koneksi,
         "SELECT * FROM voters WHERE class='$class' AND absen='$absen'"
     );
+    if (!$cekAbsen) {
+        die("Query Error: " . mysqli_error($koneksi));
+    }
+
     $absenData = mysqli_fetch_assoc($cekAbsen);
 
-    // Jika nomor absen sudah dipakai di kelas itu
     if ($absenData) {
-
-        // Jika sudah voting → TOLAK login
+        // Sudah voting → tolak
         if ($absenData['has_voted'] == 1) {
             echo "<script>
                     alert('Nomor absen ini sudah digunakan untuk voting!');
@@ -33,7 +38,7 @@ if (isset($_POST['login'])) {
             exit;
         }
 
-        // Jika BELUM voting → izinkan login pakai akun itu
+        // Belum voting → login
         $_SESSION['voter_id']    = $absenData['id'];
         $_SESSION['voter_name']  = $absenData['name'];
         $_SESSION['voter_class'] = $absenData['class'];
@@ -41,29 +46,31 @@ if (isset($_POST['login'])) {
 
         header("Location: index_public.php");
         exit;
+    } else {
+        // Nomor absen belum terdaftar → buat akun baru
+        $insert = mysqli_query($koneksi,
+            "INSERT INTO voters (name, class, absen, has_voted) VALUES ('$name', '$class', '$absen', 0)"
+        );
+        if (!$insert) {
+            die("Gagal membuat akun baru: " . mysqli_error($koneksi));
+        }
+
+        $id = mysqli_insert_id($koneksi);
+
+        $_SESSION['voter_id']    = $id;
+        $_SESSION['voter_name']  = $name;
+        $_SESSION['voter_class'] = $class;
+        $_SESSION['voter_absen'] = $absen;
+
+        header("Location: index_public.php");
+        exit;
     }
-
-    // =========================================
-    // Jika nomor absen belum pernah dipakai → buat akun baru
-    // =========================================
-    mysqli_query($koneksi,
-        "INSERT INTO voters (name, class, absen) VALUES ('$name', '$class', '$absen')"
-    );
-
-    $id = mysqli_insert_id($koneksi);
-
-    $_SESSION['voter_id']    = $id;
-    $_SESSION['voter_name']  = $name;
-    $_SESSION['voter_class'] = $class;
-    $_SESSION['voter_absen'] = $absen;
-
-    header("Location: index_public.php");
-    exit;
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Pemilih</title>
     <link rel="stylesheet" href="style/login_vote.css">
@@ -71,19 +78,24 @@ if (isset($_POST['login'])) {
 <body>
 
 <div class="login-box">
-    <h2>Login Pemilih Kandidat Ketua Osis</h2>
+    <form method="POST" class="form_container">
 
-   <form method="POST">
+        <div class="title_container">
+            <p class="title">LOGIN SISWA SMK SEMEN GRESIK</p>
+            <span class="subtitle">Silakan masukkan data Anda</span>
+        </div>
 
-    <label>Nama Lengkap</label>
-    <input type="text" name="name" required placeholder="Nama Lengkap">
+        <!-- Nama -->
+        <div class="input_container">
+            <label class="input_label">Nama</label>
+            <input placeholder="Masukkan nama lengkap" name="name" type="text" class="input_field" required>
+        </div>
 
-    <label>Nomor Absen</label>
-    <input type="number" name="absen" required placeholder="Nomor Absen" min="1" max="50">
-
-    <label>Kelas</label>
-    <select name="class" required style="width:100%; padding:10px; border-radius:8px;">
-        <option value="">-- Pilih Kelas --</option>
+        <!-- Kelas -->
+        <div class="input_container">
+            <label class="input_label">Kelas</label>
+            <select name="class" required class="input_field">
+               <option value="">-- Pilih Kelas --</option>
 
         <optgroup label="Kelas X">
             <option value="X RPL 1">X RPL 1</option>
@@ -123,17 +135,25 @@ if (isset($_POST['login'])) {
             <option value="XII TKRO">XII TKRO</option>
             <option value="XII TP">XII TP</option>
         </optgroup>
-    </select>
+            </select>
+        </div>
 
-    <button type="submit" name="login">Masuk Voting</button>
+        <!-- Nomor Absen -->
+        <div class="input_container">
+            <label class="input_label">Absen</label>
+            <input placeholder="Nomor absen" name="absen" type="number" class="input_field" required>
+        </div>
 
-    <p class="staff-link">
-    Apakah anda guru/staff lainnya? 
-    <a href="login_guru.php">Klik di sini</a>
-</p>
+        <button type="submit" class="sign-in_btn" name="login">Login</button>
 
-</form>
+        <div class="separator">
+            <hr class="line"><span>Or</span><hr class="line">
+        </div>
 
+        <button type="button" class="sign-in_ggl" onclick="window.location.href='login_guru.php'">
+            Guru / Staff? Klik disini
+        </button>
+    </form>
 </div>
 
 </body>

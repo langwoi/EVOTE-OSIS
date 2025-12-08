@@ -15,7 +15,7 @@
     <p>Terima kasih, suara Anda telah berhasil disimpan.</p>
 
     <div class="btn-group">
-        <a href="login_vote.php" class="btn home">Kembali ke Beranda</a>
+        <a href="index_public.php" class="btn home">Kembali ke Beranda</a>
         <a href="maintenance.php" class="btn result">Lihat Hasil Voting</a>
     </div>
 </div>
