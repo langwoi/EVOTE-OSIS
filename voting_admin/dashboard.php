@@ -1,30 +1,24 @@
 <?php
 session_start();
-if (empty($_SESSION['admin'])) header("Location: login.php");
+if(empty($_SESSION['admin'])) header("Location: login.php");
 include "koneksi.php";
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin</title>
     <link rel="stylesheet" href="style/dashboard.css">
 </head>
 <body>
+<button class="open-circle" id="openSidebar">☰</button>
 
-<div class="dashboard-container">
-    <h2>Dashboard Admin</h2>
 
-    <!-- Menu Navigasi -->
-    <div class="nav-menu">
-        <a href="tambah.php">Tambah Calon</a>
-        <a href="maintenance.php">Voting</a>
-        <a href="hasil.php">Hasil Voting</a>
-        <a href="logout.php">Logout</a>
-    </div>
+<?php include "sidebar.php"; ?>
 
-    <!-- Tabel Kandidat -->
+<main class="content" id="mainContent">
+    <h2>Dashboard Admin</h2><br>
+
     <table class="candidate-table">
         <thead>
             <tr>
@@ -35,25 +29,22 @@ include "koneksi.php";
         </thead>
         <tbody>
         <?php
-        $data = mysqli_query($koneksi, "SELECT * FROM candidates ORDER BY name ASC");
-        while ($row = mysqli_fetch_assoc($data)) { ?>
+        $q=mysqli_query($koneksi,"SELECT * FROM candidates");
+        while($r=mysqli_fetch_assoc($q)){ ?>
             <tr>
-                <td><?= htmlspecialchars($row['name']); ?></td>
-                <td><?= htmlspecialchars($row['vote']); ?></td>
+                <td><?= htmlspecialchars($r['name']) ?></td>
+                <td><?= $r['vote'] ?></td>
                 <td class="action-cell">
-                    <a href="edit.php?id=<?= $row['id']; ?>" class="btn edit-btn" title="Edit">
-                        ✏️ Edit
-                    </a>
-                    <a href="hapus.php?id=<?= $row['id']; ?>" class="btn delete-btn" title="Hapus"
-                       onclick="return confirm('Yakin ingin menghapus calon ini?')">
-                        🗑️ Hapus
-                    </a>
+                    <a class="btn edit-btn" href="edit.php?id=<?= $r['id'] ?>">Edit</a>
+                    <a class="btn delete-btn" href="hapus.php?id=<?= $r['id'] ?>" onclick="return confirm('Hapus?')">Hapus</a>
                 </td>
             </tr>
         <?php } ?>
         </tbody>
     </table>
-</div>
+</main>
+
+<script src="sidebar.js"></script>
 
 </body>
 </html>

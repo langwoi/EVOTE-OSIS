@@ -7,20 +7,36 @@
 }
 
 body {
-    background: #f1f4f9;
+    background-image: url("../FOTO/bg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
+/*======= foto ============= */
+.head-foto{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.head-foto img{
+    height: 60px;
+}
+.head-foto .osis{
+    height: 70px;
+}
+
 /* ====== WRAPPER BOX ====== */
 .login-box {
-    width: 430px;
+    width: 100%;
+    max-width: 550px;
     background: #ffffff;
     padding: 35px 40px;
     border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.50);
 }
 
 /* ERROR MESSAGE */
@@ -84,14 +100,14 @@ body {
 }
 
 .input_field:focus {
-    border-color: #4a7df0;
+    border-color: #BF124D;
     box-shadow: 0 0 0 3px rgba(74,125,240,0.2);
 }
 
 /* ====== SIGN IN BUTTON ====== */
 .sign-in_btn {
     width: 100%;
-    background: #4a7df0;
+    background: #BF124D;
     border: none;
     padding: 13px;
     margin-top: 28px;
@@ -104,7 +120,7 @@ body {
 }
 
 .sign-in_btn:hover {
-    background: #3c6ee6;
+    background: #76153C;
 }
 
 /* ====== SEPARATOR ====== */
@@ -147,23 +163,6 @@ body {
     background: #f4f4f4;
 }
 
-/* ====== APPLE BUTTON ====== */
-.sign-in_apl {
-    width: 100%;
-    background: black;
-    border: none;
-    padding: 12px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 14px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    transition: 0.2s;
-}
 
 .sign-in_apl:hover {
     background: #333;

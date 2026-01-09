@@ -74,14 +74,20 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Pemilih</title>
     <link rel="stylesheet" href="style/login_vote.css">
+    <link rel="icon" type="image/png" id="favicon" href="FOTO/Logo OSIS SMK-min.png">
 </head>
 <body>
-
+    
 <div class="login-box">
+    <div class="head-foto">
+        <img src="FOTO/Logo OSIS SMK-min.png" alt="" class="osis">
+        <img src="FOTO/logo_smksg-min.png" alt="">
+    </div>
+
     <form method="POST" class="form_container">
 
         <div class="title_container">
-            <p class="title">LOGIN SISWA SMK SEMEN GRESIK</p>
+            <p class="title">REGISTER SISWA SMK SEMEN GRESIK</p>
             <span class="subtitle">Silakan masukkan data Anda</span>
         </div>
 
@@ -108,6 +114,7 @@ if (isset($_POST['login'])) {
             <option value="X PH">X PH</option>
             <option value="X TKRO">X TKRO</option>
             <option value="X TP">X TP</option>
+            <option value="X TKI">X TKI</option>
         </optgroup>
 
         <optgroup label="Kelas XI">
@@ -121,19 +128,20 @@ if (isset($_POST['login'])) {
             <option value="XI PH">XI PH</option>
             <option value="XI TKRO">XI TKRO</option>
             <option value="XI TP">XI TP</option>
+            <option value="XI TKI">XI TKI</option>
         </optgroup>
 
         <optgroup label="Kelas XII">
             <option value="XII RPL 1">XII RPL 1</option>
             <option value="XII RPL 2">XII RPL 2</option>
-            <option value="XII TPM 1">XII TPM 1</option>
-            <option value="XII TPM 2">XII TPM 2</option>
+            <option value="XII TPM">XII TPM</option>
             <option value="XII TITL 1">XII TITL 1</option>
             <option value="XII TITL 2">XII TITL 2</option>
             <option value="XII TOI">XII TOI</option>
             <option value="XII PH">XII PH</option>
             <option value="XII TKRO">XII TKRO</option>
             <option value="XII TP">XII TP</option>
+            <option value="XII TKI">XII TKI</option>
         </optgroup>
             </select>
         </div>
@@ -144,7 +152,7 @@ if (isset($_POST['login'])) {
             <input placeholder="Nomor absen" name="absen" type="number" class="input_field" required>
         </div>
 
-        <button type="submit" class="sign-in_btn" name="login">Login</button>
+        <button type="submit" class="sign-in_btn" name="login">Register</button>
 
         <div class="separator">
             <hr class="line"><span>Or</span><hr class="line">

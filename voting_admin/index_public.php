@@ -1,5 +1,11 @@
 <?php 
 session_start();
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Expires: Sat, 01 Jan 2000 00:00:00 GMT");
+
 include "koneksi.php"; 
 
 // Proteksi halaman
@@ -51,21 +57,26 @@ $has_voted = $user['has_voted'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voting Online</title>
     <link rel="stylesheet" href="style/index_public.css">
+     <link rel="icon" type="image/png" id="favicon" href="FOTO/Logo OSIS SMK-min.png">
 </head>
 
 <body>
+
+<div id="loader">
+    <div class="loader"></div>
+</div>
 
 <div id="pageContent">
 
 <header class="hero">
     <div class="overlay"></div>
     <div class="hero-content">
-        <img src="https://sikita.smksemengresik.sch.id/img/logo_smksg.png" class="logo-header" alt="Logo Sekolah">
+        <img src="FOTO/logo_smksg-min.png" class="logo-header" alt="Logo Sekolah">
         <div class="hero-text">
             <h1>SISTEM PEMILIHAN KETUA & WAKIL KETUA OSIS SMKSG 25/26</h1>
             <p>Selamat Datang di Website Voting Sekolah</p>
         </div>
-        <img src="FOTO/Logo OSIS SMK.png" class="logo-header" alt="Logo Sekolah">
+        <img src="FOTO/Logo OSIS SMK-min.png" class="logo-header" alt="Logo Sekolah">
     </div>
 </header>
 
@@ -147,9 +158,9 @@ $has_voted = $user['has_voted'];
         <img src="FOTO/Logo OSIS SMK.png" width="55" alt="logo osis">
     </div>
     <h3>OSIS SMK SEMEN GRESIK — Sistem E-Voting</h3>
-    <p>JLN. ARIEF RAHMAN HAKIM NO 90. GRESIK</p>
-    <p>WEBSITE BY GALANG CIPTA R, BANTUAN CHATGPT</p>
-    <p class="copy">&copy; 2025 All Rights Reserved.</p>
+    <p>📍 Jl. Arief Rahman Hakim No. 90, Gresik</p>
+    <p>💻 Sistem Pemilihan Ketua & Wakil Ketua OSIS</p>
+    <p class="copy">&copy; 2025 — OSIS SMK Semen Gresik</p>
 </footer>
 
 </div>
@@ -174,7 +185,7 @@ $has_voted = $user['has_voted'];
         </label>
 
         <button class="rules-btn" id="rulesBtn" onclick="closeRules()" disabled>
-            Saya Mengerti & Lanjut
+            Saya Mengerti & lanjutkan
         </button>
     </div>
 </div>
@@ -237,6 +248,22 @@ window.addEventListener("load", function () {
         });
     }
 });
+
+window.addEventListener("load", function () {
+    const loader = document.getElementById("loader");
+    const pageconst = document.getElementById("pageContent");
+
+    setTimeout(() => {
+        loader.style.display = "none";
+        pageconst.style.display = "block";
+        pageconst.classList.add("show")
+    }, 1000);
+});
+history.pushState(null, null, location.href);
+
+window.onpopstate = function () {
+    history.go(1);
+};
 </script>
 
 </body>

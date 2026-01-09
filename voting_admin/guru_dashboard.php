@@ -24,6 +24,7 @@ $data = mysqli_fetch_assoc($q);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Guru</title>
     <link rel="stylesheet" href="style/index_public.css"> <!-- pakai style yang sama -->
+     <link rel="icon" type="image/png" id="favicon" href="FOTO/Logo OSIS SMK-min.png">
 </head>
 
 <body>

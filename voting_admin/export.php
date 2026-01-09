@@ -17,7 +17,7 @@ while ($d = mysqli_fetch_assoc($q)) {
     echo "<tr>
         <td>".$no++."</td>
         <td>".$d['name']."</td>
-        <td>".$d['votes']."</td>
+        <td>".$d['vote']."</td>
     </tr>";
 }
 

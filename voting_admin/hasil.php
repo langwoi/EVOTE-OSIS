@@ -8,50 +8,63 @@ $data = mysqli_query($koneksi, "SELECT * FROM candidates ORDER BY votes DESC");
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="UTF-8">
 <title>Hasil Voting OSIS</title>
 <link rel="stylesheet" href="style/hasil.css">
+ <link rel="icon" type="image/png" id="favicon" href="FOTO/Logo OSIS SMK-min.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="style/dashboard.css">
 </head>
 <body>
+    <!-- BUTTON MOBILE -->
+<button class="open-circle" id="openSidebar">☰</button>
 
-<div class="container">
-    <h1>📊 HASIL PEMILIHAN KETUA & WAKIL KETUA OSIS</h1>
-    <p class="subtitle">Data suara ditampilkan secara realtime</p>
+<!-- SIDEBAR -->
+<?php include "sidebar.php"; ?>
 
-    <table>
-        <tr>
-            <th>No</th>
-            <th>Nama Kandidat</th>
-            <th>Jumlah Suara</th>
-        </tr>
+<!-- CONTENT -->
+<div class="content full">
+    <div class="container">
 
-        <?php
-        $no = 1;
-        $nama = [];
-        $suara = [];
-        while ($d = mysqli_fetch_assoc($data)) {
-            $nama[] = $d['name'];
-            $suara[] = $d['vote'];
-        ?>
-        <tr>
-            <td><?= $no++; ?></td>
-            <td><?= $d['name']; ?></td>
-            <td><strong><?= $d['vote']; ?></strong></td>
-        </tr>
-        <?php } ?>
-    </table>
+        <h1>📊 HASIL PEMILIHAN OSIS</h1>
+        <p class="subtitle">Data suara realtime</p>
 
-    <div class="btn-area">
-        <a href="export.php" class="btn excel">📥 Download Excel</a>
-        <a href="dashboard.php" class="btn back">⬅ Kembali</a>
-    </div>
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Suara</th>
+            </tr>
 
-    <div class="chartBox">
-        <canvas id="barChart"></canvas>
+            <?php
+            $no = 1;
+            $nama = [];
+            $suara = [];
+
+            while ($d = mysqli_fetch_assoc($data)) {
+                $nama[] = $d['name'];
+                $suara[] = $d['vote'];
+            ?>
+            <tr>
+                <td><?= $no++ ?></td>
+                <td><?= htmlspecialchars($d['name']) ?></td>
+                <td><strong><?= $d['vote'] ?></strong></td>
+            </tr>
+            <?php } ?>
+        </table>
+
+        <div class="chartBox">
+            <canvas id="barChart"></canvas>
+        </div>
+
+        <div class="btn-area">
+            <a href="dashboard.php" class="btn back">⬅ Kembali</a>
+        </div>
+
     </div>
 </div>
+
 
 <script>
 const ctx = document.getElementById('barChart');
@@ -90,6 +103,20 @@ new Chart(ctx, {
         }
     }
 });
+openBtn.addEventListener("click", function () {
+        sidebar.classList.toggle("active");
+            document.addEventListener("click", function (e) {
+        if (
+            sidebar.classList.contains("active") &&
+            !sidebar.contains(e.target) &&
+            !openBtn.contains(e.target)
+        ) {
+            sidebar.classList.remove("active");
+        }
+    });
+    });
+
+
 </script>
 
 

@@ -2,14 +2,10 @@
 session_start();
 include "koneksi.php";
 
-// =====================
-// Cek Login
-// =====================
 if (!isset($_SESSION['voter_id']) && !isset($_SESSION['guru_id'])) {
-    die("Akses ditolak. Silakan login terlebih dahulu.");
+    die("Akses ditolak");
 }
 
-// Ambil data dari URL
 $id_candidate = $_GET['id'] ?? '';
 $role = $_GET['role'] ?? '';
 
@@ -17,56 +13,61 @@ if ($id_candidate == '' || $role == '') {
     die("Data tidak valid");
 }
 
-// =====================
-// Proses Voting
-// =====================
+/* SISWA*/
 if ($role == "siswa" && isset($_SESSION['voter_id'])) {
 
     $user_id = $_SESSION['voter_id'];
 
-    // Cek status voting siswa
-    $cek = mysqli_query($koneksi, "SELECT has_voted FROM voters WHERE id='$user_id' LIMIT 1");
-    if (!$cek) die("Query Error: " . mysqli_error($koneksi));
+    $cek = mysqli_query($koneksi,
+        "SELECT has_voted FROM voters WHERE id='$user_id'"
+    );
     $user = mysqli_fetch_assoc($cek);
 
     if ($user['has_voted'] == 1) {
-        die("❌ Anda sudah melakukan voting!");
+        die("Sudah voting");
     }
 
-    // Tambah vote kandidat
-    $update_vote = mysqli_query($koneksi, "UPDATE candidates SET vote = vote + 1 WHERE id='$id_candidate'");
-    if (!$update_vote) die("Gagal update vote: " . mysqli_error($koneksi));
+    // 🔥 NAIKKAN SUARA (BENAR)
+    mysqli_query($koneksi,
+        "UPDATE candidates SET vote = vote + 1 WHERE id='$id_candidate'"
+    );
 
-    // Tandai siswa sudah voting
-    $update_user = mysqli_query($koneksi, "UPDATE voters SET has_voted = 1 WHERE id='$user_id'");
-    if (!$update_user) die("Gagal update status voting: " . mysqli_error($koneksi));
+    // 🔥 SIMPAN PILIHAN
+    mysqli_query($koneksi,
+        "UPDATE voters 
+         SET has_voted = 1, candidate_id = '$id_candidate' 
+         WHERE id='$user_id'"
+    );
+}
 
-} else if ($role == "guru" && isset($_SESSION['guru_id'])) {
+/* =====================
+   GURU
+===================== */
+elseif ($role == "guru" && isset($_SESSION['guru_id'])) {
 
     $username = $_SESSION['guru_id'];
 
-    // Cek status voting guru
-    $cek = mysqli_query($koneksi, "SELECT has_voted FROM guru_admin WHERE username='$username' LIMIT 1");
-    if (!$cek) die("Query Error: " . mysqli_error($koneksi));
+    $cek = mysqli_query($koneksi,
+        "SELECT has_voted FROM guru_admin WHERE username='$username'"
+    );
     $user = mysqli_fetch_assoc($cek);
 
     if ($user['has_voted'] == 1) {
-        die("❌ Anda sudah melakukan voting!");
+        die("Sudah voting");
     }
 
-    // Tambah vote kandidat
-    $update_vote = mysqli_query($koneksi, "UPDATE candidates SET vote = vote + 1 WHERE id='$id_candidate'");
-    if (!$update_vote) die("Gagal update vote: " . mysqli_error($koneksi));
+    // 🔥 NAIKKAN SUARA (BENAR)
+    mysqli_query($koneksi,
+        "UPDATE candidates SET vote = vote + 1 WHERE id='$id_candidate'"
+    );
 
-    // Tandai guru sudah voting
-    $update_user = mysqli_query($koneksi, "UPDATE guru_admin SET has_voted = 1 WHERE username='$username'");
-    if (!$update_user) die("Gagal update status voting: " . mysqli_error($koneksi));
-
-} else {
-    die("Akses tidak sah.");
+    // 🔥 SIMPAN PILIHAN
+    mysqli_query($koneksi,
+        "UPDATE guru_admin 
+         SET has_voted = 1, candidate_id = '$id_candidate' 
+         WHERE username='$username'"
+    );
 }
 
-// Redirect setelah voting sukses
 header("Location: sukses.php");
 exit;
-?>

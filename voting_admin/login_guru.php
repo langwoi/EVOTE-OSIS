@@ -43,28 +43,33 @@ if (isset($_POST['login'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login / Register Guru</title>
     <link rel="stylesheet" href="style/login_vote.css">
+     <link rel="icon" type="image/png" id="favicon" href="FOTO/Logo OSIS SMK-min.png">
 </head>
 <body>
 
 <div class="login-box">
+    <div class="head-foto">
+        <img src="FOTO/Logo OSIS SMK-min.png" alt="" class="osis">
+        <img src="FOTO/logo_smksg-min.png" alt="">
+    </div>
     <form method="POST" class="form_container">
 
         <div class="title_container">
-            <p class="title">LOGIN / REGISTER GURU / STAFF</p>
-            <span class="subtitle">Isi username & mapel, nanti otomatis dibuat akun kalau belum ada 😎</span>
+            <p class="title"> REGISTER GURU / STAFF</p>
+            <span class="subtitle">Isi Nama Dan Jabatan, nanti otomatis dibuat akun kalau belum ada 😎</span>
         </div>
 
         <div class="input_container">
-            <label class="input_label">Username</label>
+            <label class="input_label">NAMA</label>
             <input placeholder="Masukkan username" name="username" type="text" class="input_field" required>
         </div>
 
         <div class="input_container">
-            <label class="input_label">Mata Pelajaran</label>
+            <label class="input_label">JABATAN</label>
             <input placeholder="Masukkan mata pelajaran" name="mapel" type="text" class="input_field" required>
         </div>
 
-        <button type="submit" class="sign-in_btn" name="login">Login / Register</button>
+        <button type="submit" class="sign-in_btn" name="login"> Register</button>
 
         <div class="separator">
             <hr class="line"><span>Or</span><hr class="line">

@@ -1,56 +1,117 @@
-.form-container {
-    width: 350px;
-    margin: 30px auto;
-    padding: 22px;
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+}
+
+body {
+    background: #f3f4f6;
+}
+
+/* CARD */
+.container {
+    max-width: 520px;
+    margin: 60px auto;
     background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
 }
 
-h2 {
+/* HEADER */
+.container h2 {
     text-align: center;
-    margin-bottom: 18px;
+    font-size: 22px;
+    margin-bottom: 26px;
+    color: #111827;
 }
 
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* LABEL */
 label {
-    display: block;
-    margin-bottom: 6px;
-    margin-top: 10px;
-    font-weight: bold;
+    font-size: 13px;
+    color: #374151;
+    font-weight: 500;
 }
 
-input[type=text],
-input[type=file] {
+/* INPUT & TEXTAREA */
+input[type="text"],
+textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 11px 14px;
+    border: 1px solid #d1d5db;
     border-radius: 8px;
+    font-size: 14px;
+    background: #f9fafb;
 }
 
+/* FILE INPUT */
+input[type="file"] {
+    border: 1px dashed #9ca3af;
+    padding: 10px;
+    border-radius: 8px;
+    background: #f9fafb;
+}
+
+/* FOCUS */
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* TEXTAREA */
+textarea {
+    resize: vertical;
+}
+
+/* FOTO PREVIEW */
+.preview {
+    display: flex;
+    justify-content: center;
+}
+
+.preview img {
+    width: 140px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+/* BUTTON */
 button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 18px;
-    background: #1d3557;
-    color: #fff;
+    margin-top: 10px;
+    padding: 12px;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    color: #ffffff;
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
+    border-radius: 10px;
     font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 button:hover {
-    background: #16324a;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(37,99,235,0.35);
 }
 
-.back-btn {
-    display: block;
-    text-align: center;
-    margin-top: 14px;
-    padding: 8px;
-    background: #ccc;
-    color: #000;
-    border-radius: 8px;
-    text-decoration: none;
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .container {
+        margin: 30px 16px;
+        padding: 22px;
+    }
 }

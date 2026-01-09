@@ -1,0 +1,197 @@
+/* =====================
+   ROOT & RESET
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f5f7ff, #eef1ff);
+    color: #2d2d2d;
+    padding: 16px;
+}
+
+/* =====================
+   TITLE
+===================== */
+h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #4f46e5;
+    margin-bottom: 18px;
+}
+
+h3 {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #6366f1;
+    margin-bottom: 12px;
+}
+
+/* =====================
+   TABS
+===================== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.tabs a {
+    padding: 8px 18px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #555;
+    transition: all .25s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+.tabs a:hover {
+    transform: translateY(-2px);
+}
+
+.tabs a.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+}
+
+/* =====================
+   CLASS NAV
+===================== */
+.class-nav {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.class-nav a {
+    display: inline-block;
+    margin: 4px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.7);
+    color: #555;
+    text-decoration: none;
+    transition: all .2s ease;
+}
+
+.class-nav a.active {
+    background: #ec4899;
+    color: #fff;
+}
+
+/* =====================
+   TABLE CARD
+===================== */
+.table-wrap {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    padding: 10px 6px;
+    color: #6366f1;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+    padding: 9px 6px;
+    font-size: 0.8rem;
+    text-align: center;
+    border-bottom: 1px solid #f1f1f1;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: rgba(99,102,241,0.05);
+}
+
+.empty {
+    padding: 18px;
+    font-style: italic;
+    color: #999;
+}
+
+/* =====================
+   CHART
+===================== */
+.chart-box {
+    width: 320px;        /* PAKSA KECIL */
+    height: 220px;       /* PAKSA TINGGI */
+    margin: 15px auto 25px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+}
+
+/* =====================
+   BACK BUTTON
+===================== */
+.back {
+    display: block;
+    margin: 30px auto 10px;
+    width: max-content;
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(99,102,241,.4);
+    transition: all .25s ease;
+}
+
+.back:hover {
+    transform: translateY(-2px);
+}
+
+/* =====================
+   MOBILE MODE
+===================== */
+@media (max-width: 600px) {
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    th {
+        font-size: 0.65rem;
+    }
+
+    td {
+        font-size: 0.75rem;
+    }
+
+    .tabs a {
+        font-size: 0.75rem;
+        padding: 6px 14px;
+    }
+}

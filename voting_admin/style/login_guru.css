@@ -16,12 +16,24 @@ body {
 
 /* ====== WRAPPER BOX ====== */
 .login-box {
-    width: 430px;
+    width: 100%;
+    max-width: 550px;
     background: #ffffff;
     padding: 35px 40px;
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
 }
+.head-foto{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.head-foto img{
+    height: 60px;
+}
+.head-foto .osis{
+    height: 70px;
+}
+
 
 /* ERROR MESSAGE */
 .error {
@@ -75,7 +87,6 @@ body {
     line-height: 46px;
     color: #999;
 }
-
 
 .input_label {
     font-size: 14px;

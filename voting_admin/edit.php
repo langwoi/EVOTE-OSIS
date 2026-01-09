@@ -1,77 +1,70 @@
 <?php
 session_start();
-if (empty($_SESSION['admin'])) header("Location: login.php");
+if (empty($_SESSION['admin'])) {
+    header("Location: login.php");
+    exit;
+}
 
 include "koneksi.php";
 
-// --- Ambil data calon berdasarkan ID ---
 $id = $_GET['id'];
-$data = mysqli_query($koneksi, "SELECT * FROM candidates WHERE id='$id'");
-$calon = mysqli_fetch_assoc($data);
+$data = mysqli_fetch_assoc(
+    mysqli_query($koneksi, "SELECT * FROM candidates WHERE id='$id'")
+);
 
-// Jika tombol submit ditekan
 if (isset($_POST['update'])) {
 
-    $nama = $_POST['nama'];
-    $fotoLama = $calon['photo'];
+    $nama = mysqli_real_escape_string($koneksi, $_POST['nama']);
+    $visi = mysqli_real_escape_string($koneksi, $_POST['visi']);
+    $misi = mysqli_real_escape_string($koneksi, $_POST['misi']);
 
-    // Cek apakah upload foto baru
-    if ($_FILES['foto']['name'] != "") {
+    if (!empty($_FILES['foto']['name'])) {
+        $foto = time() . "_" . $_FILES['foto']['name'];
+        move_uploaded_file($_FILES['foto']['tmp_name'], "FOTO/".$foto);
 
-        $namaFile = $_FILES['foto']['name'];
-        $tmp = $_FILES['foto']['tmp_name'];
-        $ext = pathinfo($namaFile, PATHINFO_EXTENSION);
-        $namaBaru = "foto_" . time() . "." . $ext;
-
-        // Upload
-        move_uploaded_file($tmp, "FOTO/" . $namaBaru);
-
-        // Hapus foto lama jika ada
-        if (file_exists("FOTO/" . $fotoLama) && $fotoLama != "") {
-            unlink("FOTO/" . $fotoLama);
-        }
-
-        $fotoFix = $namaBaru;
+        mysqli_query($koneksi,
+            "UPDATE candidates SET
+             name='$nama', photo='$foto', visi='$visi', misi='$misi'
+             WHERE id='$id'"
+        );
     } else {
-        $fotoFix = $fotoLama;
+        mysqli_query($koneksi,
+            "UPDATE candidates SET
+             name='$nama', visi='$visi', misi='$misi'
+             WHERE id='$id'"
+        );
     }
 
-    // Update database
-    mysqli_query($koneksi, 
-        "UPDATE candidates SET name='$nama', photo='$fotoFix' WHERE id='$id'"
-    );
-
-    header("Location: dashboard.php?msg=updated");
+    header("Location: dashboard.php");
     exit;
 }
 ?>
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <title>Edit Calon</title>
+    <title>Edit Kandidat</title>
     <link rel="stylesheet" href="style/edit.css">
 </head>
 <body>
 
-<div class="form-container">
-    <h2>Edit Calon</h2>
+<div class="container">
+    <h2>Edit Kandidat</h2>
 
     <form method="POST" enctype="multipart/form-data">
 
-        <label>Nama Calon</label>
-        <input type="text" name="nama" value="<?= $calon['name']; ?>" required>
+        <label>Nama</label>
+        <input type="text" name="nama" value="<?= htmlspecialchars($data['name']) ?>" required>
 
-        <label>Foto Saat Ini</label><br>
-        <img src="uploads/<?= $calon['photo']; ?>" width="140" style="border-radius:8px; margin-bottom:12px;"><br>
+        <label>Foto (opsional)</label>
+        <input type="file" name="foto">
 
-        <label>Upload Foto Baru (opsional)</label>
-        <input type="file" name="foto" accept="image/*">
+        <label>Visi</label>
+        <textarea name="visi" rows="4" required><?= htmlspecialchars($data['visi']) ?></textarea>
 
-        <button type="submit" name="update">Update Data</button>
-        <a href="dashboard.php" class="back-btn">Kembali</a>
+        <label>Misi</label>
+        <textarea name="misi" rows="6" required><?= htmlspecialchars($data['misi']) ?></textarea>
 
+        <button name="update">Update</button>
     </form>
 </div>
 

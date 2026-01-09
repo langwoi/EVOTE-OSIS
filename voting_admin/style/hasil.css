@@ -1,3 +1,4 @@
+/* ================= GLOBAL ================= */
 body {
     font-family: "Poppins", sans-serif;
     background: #f5f7fa;
@@ -6,85 +7,149 @@ body {
     color: #2c3e50;
 }
 
+/* ================= CONTAINER ================= */
 .container {
-    width: 90%;
-    max-width: 950px;
-    margin: 50px auto;
+    width: calc(100% - 260px);
+    max-width: 1000px;
+    margin: 40px auto;
     background: #ffffff;
-    padding: 35px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: 0.3s;
 }
 
+/* ================= JUDUL ================= */
 h1 {
     text-align: center;
-    font-size: 28px;
-    color: #2c3e50;
-    margin-bottom: 10px;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 .subtitle {
     text-align: center;
     color: #7f8c8d;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
+    font-size: 14px;
 }
 
-/* tabel */
+/* ================= TABLE ================= */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 18px 0;
+    margin-top: 20px;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 th {
-    background: #3498db;
-    color: white;
+    background: #2563eb;
+    color: #fff;
     padding: 12px;
-    font-weight: bold;
+    font-size: 14px;
 }
 
 td {
-    padding: 10px;
+    padding: 11px;
     text-align: center;
-    border-bottom: 1px solid #dcdcdc;
-    font-size: 15px;
+    font-size: 14px;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 tr:nth-child(even) {
-    background: #ecf6ff;
+    background: #f1f5f9;
 }
 
-/* tombol */
+tr:hover {
+    background: #e0e7ff;
+}
+
+/* ================= BUTTON ================= */
 .btn-area {
-    margin-top: 22px;
+    margin-top: 26px;
     text-align: center;
 }
 
 .btn {
-    padding: 12px 18px;
+    padding: 11px 18px;
+    border-radius: 8px;
     text-decoration: none;
-    border-radius: 6px;
-    font-weight: 600;
-    margin: 0 8px;
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0 6px;
     display: inline-block;
+    transition: 0.2s;
 }
 
 .excel {
-    background: #27ae60;
-    color: white;
+    background: #16a34a;
+    color: #fff;
 }
 
 .back {
-    background: #bdc3c7;
-    color: black;
+    background: #e5e7eb;
+    color: #111827;
 }
 
 .btn:hover {
-    opacity: 0.85;
+    transform: translateY(-2px);
+    opacity: 0.9;
 }
 
-/* grafik */
+/* ================= CHART ================= */
 .chartBox {
-    width: 100%;
-    margin-top: 40px;
+    margin-top: 35px;
+    background: #fff;
+    padding: 18px;
+    border-radius: 14px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.chartBox canvas {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+    .container {
+        width: 94%;
+        margin: 70px auto 30px;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+    table {
+        font-size: 13px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    .btn {
+        margin: 6px 4px;
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .chartBox {
+        padding: 14px;
+    }
+}
+
+/* ================= SIDEBAR OPEN FIX ================= */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
 }
